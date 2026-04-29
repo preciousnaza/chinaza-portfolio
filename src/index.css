@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+@plugin "daisyui";
+
+html {
+  scroll-behavior: auto;
+}
+
+:root{
+ --primary-color: #00A6FB;
+  --secondary-color: #0582ca;
+  --accent-color: #7B5EFF;
+  --background-color: #051923;
+  --card-color: #0A2A3A;
+  --border-color: #1E3A4A;
+  --text-color: #F3F9FF;
+  --muted-text: #A9C9E4;
+  --shadow-color: rgba(123, 94, 255, 0.28);
+  --color-mixed1: linear-gradient(135deg, #00a6fb, #0582ca);
+  --mixed-color2: linear-gradient(to right, #051923, #006494);
+}
+
+html[data-theme="light"]{
+  --background-color: #f3f5f6;
+  --text-color:#000000;
+  --border-color:#c0dbea;
+  --card-color:linear-gradient(to right, #006494, #00a6fb);
+}
+
+.portfolio{
+  background: var(--background-color) !important;
+}
+
+/* NavBar Style */
+[data-theme="light"] .m-nav{
+  background: linear-gradient(to right, #006494, #0582ca) !important;
+}
+
+/* Home style */
+[data-theme="light"] .welcome-btn button{
+  color: #ffffff;
+}
+
+[data-theme="light"] .description p,[data-theme="light"] .text-section p,[data-theme="light"] .skill-header p,[data-theme="light"] .color-wh{
+  color: var(--text-color);
+}
+
+[data-theme="light"] .skill-card ul li,[data-theme="light"] .skill-card-top h3,[data-theme="light"] .project-card,[data-theme="light"] .project-card-header h3,[data-theme="light"] .contact-card h3,[data-theme="light"] .contact-card{
+  color: #ffffff !important;
+}
+
+
+@media (min-width:651px){
+ [data-theme="light"]  .m-nav{
+    background: none !important;
+  }
+
+   [data-theme="light"]  .nav-bg{
+    background: linear-gradient(to right, #006494, #0582ca);
+   }
+
+   [data-theme="light"]  .nav-links.desktop .hire-me a{
+  color: #ffffff !important;
+}
+
+}
