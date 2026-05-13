@@ -29,7 +29,20 @@ const Project = () => {
       description: "Designed a simple and effective todo list app with features to add, edit, and delete tasks, along with a clean user interface.",
       tags: ["React","css"],
       link: "https://todo-react-coral-nine.vercel.app/",
+    },
+    {
+      title: "Portfolio Website",
+      description: "Designed a responsive portfolio website to showcase my skills and projects, featuring a modern layout and smooth animations.",
+      tags: ["React", "Tailwind CSS", "Responsive"],
+      link: "https://chinaza-portfolio-3wqk.vercel.app/",
+    },
+    {
+      title: "Admin Dashboard",
+      description: "Developed a sleek admin dashboard with data visualization, user management, and responsive design using next js and Tailwind CSS.",
+      tags: ["next js", "tailwind css", "responsive"],
+      link : "https://admin-dashboard-next-delta.vercel.app/",
     }
+
   ];
 
   return (

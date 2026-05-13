@@ -1,4 +1,5 @@
 import { FaHtml5, FaCss3Alt, FaReact, FaGithub } from "react-icons/fa";
+import { RiNextjsFill } from "react-icons/ri";
 import { IoLogoJavascript } from "react-icons/io5";
 import { SiTypescript } from "react-icons/si";
 
@@ -40,6 +41,12 @@ const Skill = () => {
       level: '70% ',
       width: '10rem',
     },
+    {
+      image: <RiNextjsFill size={40} color="#000" />,
+      title: "next js",
+      level: '80% ',
+      width: '12rem',
+    }
   ];
 
   return (
