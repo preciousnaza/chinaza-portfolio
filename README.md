@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+A personal portfolio website built to showcase my projects, technical skills, and front-end development experience. The portfolio highlights selected projects, responsive UI design, and modern web development practices.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- Responsive design
+- Project showcase section
+- Skills section
+- About section
+- Contact section
+- Smooth navigation
+- Modern and clean UI
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
+- React.js
+- Tailwind CSS
+- CSS3
+- JavaScript
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Development Process
+The portfolio was built using React for component-based development and Tailwind CSS for responsive styling and layout structuring. The goal was to create a clean and professional interface that presents projects and skills effectively across different devices.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Challenges & Solutions
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Responsive Design
+One challenge was maintaining a consistent layout across mobile, tablet, and desktop screens. This was solved using responsive Tailwind CSS utilities and flexible layout structures.
+
+### Component Organization
+Structuring reusable sections without making the codebase difficult to manage required separating the UI into smaller reusable React components.
+
+---
+
+## What I Learned
+- Building responsive interfaces
+- Structuring reusable React components
+- Improving UI/UX design decisions
+- Working with Tailwind CSS efficiently
+
+---
+
+## Future Improvements
+- Add animations and transitions
+- Improve accessibility
+- Add more interactive sections
+
+---
+
+## Installation & Setup
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Live Demo
+https://chinaza-portfolio-3wqk.vercel.app/
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Live Demo
+https://github.com/user-attachments/assets/e79c909a-4817-42e1-80b3-7507b41bc94f
+
+
+
