@@ -1,5 +1,5 @@
 import "./index.css";
-import "./component/Portfolio.css";
+import "./component/styles/Portfolio.css";
 import Navbar from "./component/Navbar";
 import Home from "./component/Home";
 import About from "./component/About";

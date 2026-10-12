@@ -1,66 +1,100 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
+
+:root {
+  --font-family: "Inter", sans-serif;
+
+  /* Primary palette */
+  --primary-color: #35634A;
+  --secondary-color: #294D39;
+  --accent-color: #35634A;
+
+  /* Light theme */
+  --background-color: #F7F6F2;
+  --card-color: #FFFFFF;
+  --surface-color: #E7EAE3;
+  --border-color: #D9DED5;
+  --text-color: #242923;
+  --muted-text: #626B61;
+  --shadow-color: rgba(36, 41, 35, 0.08);
+
+  /* Compatibility tokens used by existing components */
+  --dark-color: #FFFFFF;
+  --color-mixed1: #35634A;
+  --mixed-color2: #F7F6F2;
+
+  color-scheme: light;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --primary-color: #8EB69A;
+  --secondary-color: #A5C9AF;
+  --accent-color: #8EB69A;
+
+  --background-color: #171D19;
+  --card-color: #202820;
+  --surface-color: #28332A;
+  --border-color: #354239;
+  --text-color: #F4F3ED;
+  --muted-text: #BBC4BA;
+  --shadow-color: rgba(0, 0, 0, 0.22);
+
+  --dark-color: #202820;
+  --color-mixed1: #8EB69A;
+  --mixed-color2: #171D19;
+
+  color-scheme: dark;
+}
 
 html {
   scroll-behavior: auto;
 }
 
-:root{
- --primary-color: #00A6FB;
-  --secondary-color: #0582ca;
-  --accent-color: #7B5EFF;
-  --background-color: #051923;
-  --card-color: #0A2A3A;
-  --border-color: #1E3A4A;
-  --text-color: #F3F9FF;
-  --muted-text: #A9C9E4;
-  --shadow-color: rgba(123, 94, 255, 0.28);
-  --color-mixed1: linear-gradient(135deg, #00a6fb, #0582ca);
-  --mixed-color2: linear-gradient(to right, #051923, #006494);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-html[data-theme="light"]{
-  --background-color: #f3f5f6;
-  --text-color:#000000;
-  --border-color:#c0dbea;
-  --card-color:linear-gradient(to right, #006494, #00a6fb);
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
 }
 
-.portfolio{
-  background: var(--background-color) !important;
-}
-
-/* NavBar Style */
-[data-theme="light"] .m-nav{
-  background: linear-gradient(to right, #006494, #0582ca) !important;
-}
-
-/* Home style */
-[data-theme="light"] .welcome-btn button{
-  color: #ffffff;
-}
-
-[data-theme="light"] .description p,[data-theme="light"] .text-section p,[data-theme="light"] .skill-header p,[data-theme="light"] .color-wh{
+.portfolio {
+  min-height: 100vh;
+  background: var(--background-color);
   color: var(--text-color);
 }
 
-[data-theme="light"] .skill-card ul li,[data-theme="light"] .skill-card-top h3,[data-theme="light"] .project-card,[data-theme="light"] .project-card-header h3,[data-theme="light"] .contact-card h3,[data-theme="light"] .contact-card{
-  color: #ffffff !important;
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 
-@media (min-width:651px){
- [data-theme="light"]  .m-nav{
-    background: none !important;
+::selection {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-
-   [data-theme="light"]  .nav-bg{
-    background: linear-gradient(to right, #006494, #0582ca);
-   }
-
-   [data-theme="light"]  .nav-links.desktop .hire-me a{
-  color: #ffffff !important;
-}
-
 }

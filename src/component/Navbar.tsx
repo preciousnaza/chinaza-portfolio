@@ -1,117 +1,194 @@
-import {useState, useEffect,useRef} from "react"
-import {Link} from "react-scroll"
+
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaSun, FaMoon, FaTimes } from "react-icons/fa";
-import "./Navbar.css";
+import "./styles/Navbar.css";
 
-const navbar = () => {
+type Theme = "light" | "dark";
 
-  const [theme,setTheme] = useState('dark');
-  const [menuopen, setmenuopen] = useState(false);
-  const menuclose = useRef<HTMLSpanElement>(null)
-
-  const toggleMenu = (e:any)=>{
-    e.stopPropagation();
-    setmenuopen(prev => !prev)
-  }
-
-  useEffect(()=>{
-      const handleClickOutside = (e:any)=>{
-    if(menuopen && menuclose.current && !menuclose.current.contains(e.target)){
-      setmenuopen(false)
+const Navbar = () => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof document !== "undefined") {
+      return document.documentElement.getAttribute("data-theme") === "light"
+        ? "light"
+        : "dark";
     }
-  }
 
-  document.addEventListener('click',handleClickOutside)
-  return ()=>{
-  document.removeEventListener('click',handleClickOutside)
-  }
-  },[menuopen])
+    return "light";
+  });
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navbarRef = useRef<HTMLElement>(null);
 
-  const handleThemeController = (e:any)=> {
-    const newTheme = e.target.checked ? "dark":"light"
-    setTheme(newTheme)
-    document.documentElement.setAttribute("data-theme", newTheme)
-  }
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
-  useEffect( ()=> {
-    const HandleResize = ()=>{
-      if(window.innerWidth >= 651){
-        setmenuopen(menuopen)
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleClickOutside = (event: PointerEvent) => {
+      if (
+        navbarRef.current &&
+        !navbarRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
       }
     };
 
-      window.addEventListener('resize', HandleResize)
-
-      return ()=>{
-      window.removeEventListener('resize',HandleResize)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
       }
+    };
 
-    
-  }, [])
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
 
+    document.addEventListener("pointerdown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [menuOpen]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) =>
+      currentTheme === "dark" ? "light" : "dark"
+    );
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const navItems = [
+    { label: "Home", target: "home" },
+    { label: "About", target: "about" },
+    { label: "Skills", target: "skill" },
+    { label: "Projects", target: "project" },
+    { label: "Contact", target: "contact" },
+  ];
 
   return (
-    <>
+    <header className="navbar-wrapper" ref={navbarRef}>
+      <nav className="navbar" aria-label="Main navigation">
+        <Link
+          to="home"
+          smooth
+          duration={300}
+          className="navbar-brand"
+          onClick={closeMenu}
+          aria-label="Portfolio home"
+        >
+          Portfolio<span className="brand-dot">.</span>
+        </Link>
 
-        <div className="mb-navbar">
-          <div className="nav-bg">
-            <div className="m-nav">
-            <span>
-              <h1 className="text-xl">Portfolio</h1>
-            </span>
+        <div className={`navbar-links ${menuOpen ? "is-open" : ""}`}>
+          {navItems.map((item) => (
+            <Link
+              key={item.target}
+              to={item.target}
+              smooth
+              duration={300}
+              spy
+              offset={-90}
+              activeClass="active"
+              className="navbar-link"
+              onClick={closeMenu}
+            >
+              {item.label}
+            </Link>
+          ))}
 
-            <span className="theme-icon ">
-              <label className="swap swap-rotate">
-               
-                <input type="checkbox" className="theme-controller" value="synthwave" checked={theme === 'dark'} onChange={handleThemeController}/>
-
-            
-                <FaSun className="swap-off h-5 w-5 fill-current"/>
-
-                
-                <FaMoon className="swap-on h-5 w-5 fill-current"/>
-
-
-              </label>
-            </span>
-
-            <span className="theme-icon mobile-s  hambuger" onClick={toggleMenu}>
-              {menuopen ? <FaTimes size={20}/> : <GiHamburgerMenu size={20}/>}
-            </span>
-
-          </div>
-
-            <span ref={menuclose} className={`nav-links ${menuopen ? "mobile" : "desktop"}`}>
-              <ul onClick={()=> setmenuopen(false)}>
-                
-                  <Link to="home" smooth={true} duration={300} spy={true} activeClass="active" >Home</Link>
-                
-               
-                  <Link to="about" smooth={true} duration={300} spy={true} activeClass="active" >About</Link >
-              
-               
-                  <Link  to="skill" smooth={true} duration={300} spy={true} activeClass="active" >Skill</Link >
-              
-               
-                  <Link  to="project" smooth={true} duration={300} spy={true} activeClass="active" >Projects</Link >
-              
-               
-                  <Link  to="contact" smooth={true} duration={300} spy={true} activeClass="active" >Contact</Link >
-              
-                  <Link  className="hire-me" to="contact" smooth={true} duration={300} spy={true} activeClass="active" >Hire me</Link >
-              
-              </ul>
-            </span>
-
-          </div>
+          <Link
+            to="contact"
+            smooth
+            duration={300}
+            offset={-90}
+            className="navbar-hire"
+            onClick={closeMenu}
+          >
+            Hire me <span aria-hidden="true">↗</span>
+          </Link>
         </div>
-      
-        
 
-    </>
+        <div className="navbar-actions">
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? (
+              <FaSun aria-hidden="true" />
+            ) : (
+              <FaMoon aria-hidden="true" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="menu-toggle"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+          >
+            {menuOpen ? (
+              <FaTimes aria-hidden="true" />
+            ) : (
+              <GiHamburgerMenu aria-hidden="true" />
+            )}
+          </button>
+        </div>
+      </nav>
+
+      <div
+        id="mobile-navigation"
+        className={`mobile-navigation ${menuOpen ? "is-open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        {navItems.map((item) => (
+          <Link
+            key={item.target}
+            to={item.target}
+            smooth
+            duration={300}
+            spy
+            offset={-90}
+            activeClass="active"
+            className="mobile-navigation-link"
+            tabIndex={menuOpen ? 0 : -1}
+            onClick={closeMenu}
+          >
+            {item.label}
+          </Link>
+        ))}
+
+        <Link
+          to="contact"
+          smooth
+          duration={300}
+          offset={-90}
+          className="mobile-navigation-hire"
+          tabIndex={menuOpen ? 0 : -1}
+          onClick={closeMenu}
+        >
+          Hire me <span aria-hidden="true">↗</span>
+        </Link>
+      </div>
+    </header>
   );
 };
 
-export default navbar;
+export default Navbar;

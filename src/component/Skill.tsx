@@ -1,102 +1,131 @@
-import { FaHtml5, FaCss3Alt, FaReact, FaGithub } from "react-icons/fa";
+
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaReact,
+  FaGithub,
+} from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
 import { IoLogoJavascript } from "react-icons/io5";
-import { SiTypescript } from "react-icons/si";
+import { SiTypescript, SiTailwindcss } from "react-icons/si";
+import "./styles/Portfolio.css";
+
+const skillGroups = [
+  {
+    icon: <FaReact />,
+    title: "React",
+    level: "Comfortable",
+    description: "Building reusable UI components",
+    color: "#61DBFB",
+  },
+  {
+    icon: <IoLogoJavascript />,
+    title: "JavaScript",
+    level: "Comfortable",
+    description: "Working with logic and interactivity",
+    color: "#D4B900",
+  },
+  {
+    icon: <SiTailwindcss />,
+    title: "Tailwind CSS",
+    level: "Comfortable",
+    description: "Creating responsive interfaces",
+    color: "#38BDF8",
+  },
+  {
+    icon: <FaHtml5 />,
+    title: "HTML5",
+    level: "Proficient",
+    description: "Writing semantic page structure",
+    color: "#E44D26",
+  },
+  {
+    icon: <FaGithub />,
+    title: "Git & GitHub",
+    level: "Working knowledge",
+    description: "Version control and project tracking",
+    color: "#8B918B",
+  },
+  {
+    icon: <SiTypescript />,
+    title: "TypeScript",
+    level: "Developing",
+    description: "Adding types to React applications",
+    color: "#3178C6",
+  },
+  {
+    icon: <RiNextjsFill />,
+    title: "Next.js",
+    level: "Developing",
+    description: "Learning modern React frameworks",
+    color: "var(--text-color)",
+  },
+  {
+    icon: <FaCss3Alt />,
+    title: "CSS3",
+    level: "Proficient",
+    description: "Styling layouts and responsive designs",
+    color: "#2683CF",
+  },
+];
 
 const Skill = () => {
-  const skillGroups = [
-    {
-      image: <FaReact size={40} color="#61DBFB" />,
-      title: "React",
-      level: '90% ',
-      width: '13rem',
-    },
-     {
-      image: <IoLogoJavascript size={40} color="#F7DF1E" />,
-      title: "Javascript",
-      level: '95% ',
-      width: '14rem',
-    },
-    {
-      image: <FaCss3Alt size={40} color="#2683CF" />,
-      title: "Tailwind CSS",
-      level: '85% ',
-      width: '10rem',
-    },
-    {
-      image: <FaHtml5 size={40} color="#E44D26" />,
-      title: "HTML5",
-      level: '100% ',
-      width: '14.8rem',
-    },
-     {
-      image: <FaGithub size={40} color="#333" />,
-      title: "Github",
-      level: '85% ',
-      width: '13rem',
-    },
-     {
-      image: <SiTypescript size={40} color="#3178C6" />,
-      title: "Typescript",
-      level: '70% ',
-      width: '10rem',
-    },
-    {
-      image: <RiNextjsFill size={40} color="#000" />,
-      title: "next js",
-      level: '80% ',
-      width: '12rem',
-    }
-  ];
-
   return (
-    <section className="skill-sec" id="skill">
+    <section className="skill-sec" id="skill" aria-labelledby="skill-title">
       <div className="skill-header">
-        <span className="section-label">My Skills</span>
-        <h2>I build confident, modern web experiences that feel uniquely polished.</h2>
+        <span className="section-label">Technical Skills</span>
+        <h2 id="skill-title">
+          The tools I use to bring <span className="color">ideas to life.</span>
+        </h2>
         <p>
-          I bring a blend of creative design and technical discipline to every project.
-          From React-powered interfaces to responsive, high-performance layouts,
-          I create web applications that look sharp and work smoothly.
+          My frontend toolkit helps me build responsive interfaces, create
+          reusable components, and turn designs into functional web experiences.
+          I'm continually improving through hands-on projects and practice.
         </p>
       </div>
 
       <div className="skill-grid">
-        {skillGroups.map((group) => (
-          <article className="skill-card" key={group.title}>
+        {skillGroups.map((skill, index) => (
+          <article className="skill-card" key={skill.title}>
             <div className="skill-card-top">
-              <span>{group.image}</span>
-              <h3>{group.title}</h3>
-            </div>
-            <div className="description">
-              <ul>
-                <li className="name">Skill Level</li>
-                <li className="percent">{group.level}</li>
-              </ul>
-              <span className="Progress-bar">
-                <span className="progress" style={{width: group.width}}></span>
+              <span
+                className="skill-icon"
+                style={{ "--skill-icon-color": skill.color } as React.CSSProperties}
+                aria-hidden="true"
+              >
+                {skill.icon}
               </span>
+
+              <span className="skill-index">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            <div className="skill-card-content">
+              <h3>{skill.title}</h3>
+              <p>{skill.description}</p>
+            </div>
+
+            <div className="skill-card-footer">
+              <span className="skill-level-dot" />
+              <span>{skill.level}</span>
             </div>
           </article>
         ))}
       </div>
 
-      <div className="skill-meta">
-        <div className="skill-meta-card">
-          <span>95%</span>
-          <p>UI craftsmanship powered by React</p>
-        </div>
-        <div className="skill-meta-card">
-          <span>90%</span>
-          <p>Responsive designs that adapt beautifully</p>
-        </div>
-        <div className="skill-meta-card">
-          <span>85%</span>
-          <p>Performance polish and seamless interactions</p>
+      <div className="skill-note">
+        <span className="skill-note-mark" aria-hidden="true">+</span>
+        <div>
+          <h3>Always learning</h3>
+          <p>
+            Strengthening my fundamentals, improving how I debug, and exploring
+            better ways to build maintainable web applications.
+          </p>
         </div>
       </div>
     </section>
   );
 };
 
-export default Skill
+export default Skill;
